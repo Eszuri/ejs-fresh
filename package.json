@@ -1,0 +1,35 @@
+{
+    "name": "project-name",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "dev": "concurrently \"npm run dev:server\" \"npm run dev:css\"",
+        "dev:server": "tsx watch --env-file .env src/index.ts",
+        "dev:css": "tailwindcss -i ./public/tailwind.css -o ./build/public/tailwind.css --watch",
+        "typecheck": "tsc --noEmit",
+        "build:css": "tailwindcss -i ./public/tailwind.css -o ./build/public/tailwind.css --minify",
+        "copy:views": "cpy \"src/views/**/*\" build/views --parents",
+        "build": "tsup src/index.ts && npm run copy:views && npm run build:css",
+        "start": "node build/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/node": "^25.0.3",
+        "concurrently": "^9.2.1",
+        "cpy-cli": "^6.0.0",
+        "tsup": "^8.5.1",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@tailwindcss/cli": "^4.1.18",
+        "dotenv": "^17.2.3",
+        "ejs": "^3.1.10",
+        "express": "^5.2.1",
+        "tailwindcss": "^4.1.18"
+    }
+}
